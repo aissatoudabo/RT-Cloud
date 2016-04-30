@@ -1,0 +1,16 @@
+<table class='table table-striped'>
+    <thead>
+    <tr>
+        {{header|raw}}
+    </tr>
+    </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+            <td>{{user.getLogin()}}</td>
+            <td>{{user.getMail()}}</td>
+            <td>{{user.getTel()}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+</table>
