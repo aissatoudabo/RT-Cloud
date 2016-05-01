@@ -60,4 +60,39 @@ class Exemples extends \BaseController {
             $service=new Service();
         $this->loadView("exemples/displayService.html",array("service"=>$service));
     }
+
+    public function serviceAdd($nom,$prix=0){
+        $service=new Service();
+        $service->setNom($nom);
+        $service->setPrix($prix);
+        DAO::insert($service);
+        $this->forward("Exemples","displayService",$service->getId());
+    }
+    public function updatePrix($idService,$update=1){
+        $service=DAO::getOne("Service", $idService);
+        if(isset($service)){
+            $service->setPrix($service->getPrix()+$update);
+            DAO::update($service);
+            $this->forward("Exemples","displayService",$service->getId());
+        }else{
+            $this->_showMessage("Impossible de charger le service","warning");
+        }
+    }
+    public function deleteService($idService){
+        $service=DAO::getOne("Service", $idService);
+        if(isset($service)){
+            DAO::delete($service);
+            $this->_showMessage($service." supprimé","success");
+        }else{
+            $this->_showMessage("Impossible de charger le service","warning");
+        }
+    }
+    public function ajaxTest(){
+        $this->loadView("exemples/ajaxTest.html");
+        Jquery::getOn("click", "a[data-ajax]", "","#response",array("attr"=>"data-ajax"));
+        Jquery::doJqueryOn(".disques", "mouseenter", "#message", "html","Affiche les disques existants");
+        Jquery::doJqueryOn(".users", "mouseenter", "#message", "html","Affiche les utilisateurs existants");
+        Jquery::doJqueryOn(".btn", "mouseout", "#message", "html");
+        echo Jquery::compile();
+    }
 }

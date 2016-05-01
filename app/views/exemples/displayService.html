@@ -8,7 +8,11 @@
             <h5>Description : </h5> <span>{{service.getDescription()}}</span>
         </li>
         <li class="list-group-item">
-            <b>Prix : </b> {{service.getPrix()}}
+            <b>Prix : </b> {{service.getPrix()}} {%if edit %}
+            <a class="btn btn-primary" href="exemples/updatePrix/{{service.getId()}}/1">Augmenter</a>
+            <a class="btn btn-warning" href="exemples/deleteService/{{service.getId()}}/">Supprimer service</a>
+            {% endif %}
+
         </li>
     </ul>
 </div>
