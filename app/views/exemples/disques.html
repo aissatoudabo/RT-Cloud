@@ -1,4 +1,25 @@
-<h1>Disques</h1>
-{% for disque in disques %}
-<b>{{ disque.getNom() }}</b> {{ disque.getUtilisateur() }}<br>
-{% endfor %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Disque </title>
+</head>
+<body>
+//Bouton Lien vers Scan/:idDisque.?>
+
+				<form action="Scan/show/:idDisque" method="POST">
+                    <input type="hidden" name="namedisk" value="<?php echo"".$disques[$numero].""?>" />
+    				<input type="hidden" name="occupation" value="<?php echo"".$taille.""?>" />
+    				<input type="hidden" name="rapport" value="<?php echo"".$rap.""?>" />
+    				<input type="hidden" name="taillemax" value="<?php echo"".$espace.""?>" />
+    				<input type="hidden" name="tarif" value="<?php echo"".$tarif.""?>" />
+    				<input type="submit" class='style' name="Ouvrir" value="Ouvrir" />
+    				</form>
+				<style type="text/css">
+    				.style{
+    				width:100%;
+    				background-color:#3F4846;
+    				color:#FFFFFF;
+    				</style>		}
+</body>
+</html>
