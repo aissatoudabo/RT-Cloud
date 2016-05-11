@@ -1,1 +1,13 @@
 deny from all
+AddDefaultCharset UTF-8
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /RT-Cloud/
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{HTTP_ACCEPT} !(.*images.*)
+    RewriteRule ^(.*)$ app/index.php?c=$1 [L]
+</IfModule>
+
+Le module rewrite doit être a

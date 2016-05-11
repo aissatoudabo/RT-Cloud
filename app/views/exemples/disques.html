@@ -1,25 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Disque </title>
 </head>
 <body>
-//Bouton Lien vers Scan/:idDisque.?>
+<div id="content">
+    <h3> Mes disques -> {{user.getLogin()}} </h3>
+    <div class="panel-body">
+        <button type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+            <a href="Disques/frm">Créer un disque</a>
+        </button>
+        <div>
+                {% for disque in user.getDisques() %}
+                <li class="list-group-item">
+                    <span class="glyphicon glyphicon-hdd"></span> <b>{{disque.getNom()}}</b>
+                    {{disque.getSize()}}/ {{disque.getQuota()}}
 
-				<form action="Scan/show/:idDisque" method="POST">
-                    <input type="hidden" name="namedisk" value="<?php echo"".$disques[$numero].""?>" />
-    				<input type="hidden" name="occupation" value="<?php echo"".$taille.""?>" />
-    				<input type="hidden" name="rapport" value="<?php echo"".$rap.""?>" />
-    				<input type="hidden" name="taillemax" value="<?php echo"".$espace.""?>" />
-    				<input type="hidden" name="tarif" value="<?php echo"".$tarif.""?>" />
-    				<input type="submit" class='style' name="Ouvrir" value="Ouvrir" />
-    				</form>
-				<style type="text/css">
-    				.style{
-    				width:100%;
-    				background-color:#3F4846;
-    				color:#FFFFFF;
-    				</style>		}
+                    <br>
+                    {% if  disques.getOccupation()<=10 %}
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="{{disque.getOccupation()}}"
+                             aria-valuemin="0" aria-valuemax="100" style="width:disques.getOccupation()}}%" >
+                            {{disque.getOccupation()}}%
+                        </div>
+                    </div>
+
+                    {% elseif disque.getOccupation()>10 and disque.getOccupation()<=50 %}
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="{{disque.getOccupation()}}"
+                             aria-valuemin="0" aria-valuemax="100" style="width:{{disque.getOccupation()}}%" >
+                            {{disque.getOccupation()}}%
+                        </div>
+                    </div>
+
+                    {% elseif disques.getOccupation()>50 and disque.getOccupation()<=80 %}
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="{{disque.getOccupation()}}"
+                             aria-valuemin="0" aria-valuemax="100" style="width:{{disques.getOccupation()}}%" >
+                            {{disque.getOccupation()}}%
+                        </div>
+                    </div>
+
+                    {% elseif disques.getOccupation()>80 and disque.getOccupation()<=100 %}
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="{{disque.getOccupation()}}"
+                             aria-valuemin="0" aria-valuemax="100" style="width:{{disques.getOccupation()}}%" >
+                            {{disque.getOccupation()}}%
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <a href="Scan/show/{{disque.getId()}}">
+                        <button type="button" class="btn btn-block btn-primary">
+                            <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+                            Ouvrir
+                        </button>
+                    </a>
+                </li>
+                {%endfor%}
+
+        </div>
+    </div>
+</div>
 </body>
 </html>

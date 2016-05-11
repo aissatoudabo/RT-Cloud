@@ -3,54 +3,52 @@ use micro\controllers\Controller;
 use micro\js\Jquery;
 use micro\utils\RequestUtils;
 
-class MyDisques extends Controller{
-	public function initialize(){
-		if(!RequestUtils::isAjax()){
-			$this->loadView("main/vHeader.html",array("infoUser"=>Auth::getInfoUser()));
+class MyDisques extends Controller
+{
+	public function initialize()
+	{
+		if (!RequestUtils::isAjax()) {
+			$this->loadView("main/vHeader.html", array("infoUser" => Auth::getInfoUser()));
 		}
 	}
-	public function index() {
+
+	public function index()
+	{
 		echo Jquery::compile();
-		if (Auth::isAuth()==True) //verifier si un utilisateur est bien connecté
+		if (Auth::isAuth() == True) {//verifier si un utilisateur est bien connecté
 			//afficher "Mes Disques->Nom de l'utilisateur "
-		$user=Auth::getUser();
-		echo "<strong> Mes Disques </strong> ->";
-        echo $user -> getLogin();
-		   //afficher les disques
-		$disques=micro\orm\DAO::getOneToMany($user, "disques");
-		$nombredisque=count($disques);
-		echo '<br/>';
-		for ($num=0; $num > $nombredisque; $num= $num + 1){
+			$user = Auth::getUser();
+			$disques = micro\orm\DAO::getOneToMany($user, "disques");//definir la variable disque
+				$this->loadView("exemples/disques.html", array("user" => $user));
 
-		    //espace de disque uccupé.
-			$occupation=ModelUtils::getDisqueOccupation($GLOBALS["config"],$disques[$num]);
-
-			//convertir la taille en octet
-            $taille=DirectoryUtils::formatBytes($occupation);
-
-			//le pourcentage de chaque disque
-			$tarif=ModelUtils::getDisqueTarif($disques[$num]);
-			if($tarif -> getPrix()==0)
-			    {
+			 $disques->getOccupation();
+			$taille=DirectoryUtils::formatBytes(get.Occupation());
+			ModelUtils::sizeConverter("Mo");
+			$taille=$disques->getOccupation();
+		
 
 
-			}
-			else{
+			//$occupation = $disque->getOccupation();
+			//	echo "Espace occupé : " . $disque->getSize();
+			//	echo "Quota : " . $disque->getQuota();
+			//	echo "% d'occupation : " . $disque->getOccupation();
+			//	ModelUtils::sizeConverter("Mo");
+				
+			
 
 
-			}
-		}
 
-
-	
+		}else {
+			echo "vous n'étes pas connecté.";
 		}
 	}
 
-
-	public function finalize(){
-		if(!RequestUtils::isAjax()){
-			$this->loadView("main/vFooter.html");
+	public function finalize()
+		{
+			if (!RequestUtils::isAjax()) {
+				$this->loadView("main/vFooter.html");
+			}
 		}
-	}
+
 
 }

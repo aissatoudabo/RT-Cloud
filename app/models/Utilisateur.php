@@ -25,7 +25,7 @@ class Utilisateur extends Base{
 	public function getId() {
 		return $this->id;
 	}
-
+//{%for class disque in users.getDisqu
 	public function setId($id) {
 		$this->id=$id;
 		return $this;
