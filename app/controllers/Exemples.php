@@ -1,17 +1,19 @@
 class Exemples extends \BaseController {
- 
+<!--charger les services (instances de la classe Service) dans la méthode index.--->
     public function index() {
         $services=DAO::getAll("Service");
         foreach ($services as $service){
             echo $service->getNom()."<br>";
         }
 	}
+ <!-- charger les Utilisateurs dans la méthode users.-->
+
     public function users(){
         $users=DAO::getAll("Utilisateur");
         $this->loadView("Exemples/users",array("users"=>$users));
         
         }
-
+<!--charger les Disques dans la méthode disques.-->
    public function disques(){
         $disques=DAO::getAll("Disque");
         $this->loadView("Exemples/disques.html",array("disques"=>$disques));

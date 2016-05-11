@@ -6,14 +6,14 @@
 </head>
 <body>
 <div id="content">
-    <h3> Mes disques -> {{user.getLogin()}} </h3>
-    <div class="panel-body">
+    <h3> Mes disques -> {{user.getLogin()}} </h3><!--afficher "Mes disques->le nom du user"-->
+    <div class="panel-body"> <!--autre division de type bouton pour creer un disque et qui renvois vers DISQUES/FRM-->
         <button type="button" class="btn btn-default">
             <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
             <a href="Disques/frm">Créer un disque</a>
         </button>
         <div>
-                {% for disque in user.getDisques() %}
+                {% for disque in user.getDisques() %}<!--affichage du non du disque , taille et son quota-->
                 <li class="list-group-item">
                     <span class="glyphicon glyphicon-hdd"></span> <b>{{disque.getNom()}}</b>
                     {{disque.getSize()}}/ {{disque.getQuota()}}

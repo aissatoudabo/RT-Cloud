@@ -19,7 +19,7 @@ class MyDisques extends Controller
 			//afficher "Mes Disques->Nom de l'utilisateur "
 			$user = Auth::getUser();
 			$disques = micro\orm\DAO::getOneToMany($user, "disques");//definir la variable disque
-				$this->loadView("exemples/disques.html", array("user" => $user));
+				$this->loadView("exemples/disques.html", array("user" => $user,"disque"=>$disques));//CHARGED FROM VIEW
 
 			 $disques->getOccupation();
 			$taille=DirectoryUtils::formatBytes(get.Occupation());
